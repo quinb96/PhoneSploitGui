@@ -1886,7 +1886,7 @@ def withdraw_attn_window(*args):
 
 Attnwindow = tk.ThemedTk()
 Attnwindow.get_themes()
-Attnwindow.set_theme("clam")
+Attnwindow.set_theme("breeze")
 
 #icons
 phonesploitguiicon = PhotoImage(file="icons/phonesploitguilogo.png")
