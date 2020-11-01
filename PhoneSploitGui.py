@@ -68,7 +68,7 @@ def selectingapk(*args):
 
 	specifyapkwindow_label = Label(specifyapkwindow, text="Specify path to apk", font=("Meera", 10, "bold"))
 	specifyapkwindow_label.pack()
-	specifyapkwindow_entry = Entry(specifyapkwindow, width=50, bg="white")
+	specifyapkwindow_entry = Entry(specifyapkwindow, width=50, bg="white", font=("Meera", 10, "bold"))
 	specifyapkwindow_entry.insert(0, "example: /data/app/com.snapchat.android-ynA9hJ-94Fg4EQTKHu_qTA==/base.apk")
 	specifyapkwindow_entry.bind("<Return>", savefile)
 	specifyapkwindow_entry.bind("<ButtonRelease-1>", specifyentrydelete)
