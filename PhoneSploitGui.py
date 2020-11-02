@@ -1690,8 +1690,8 @@ def displayoptions(*args):
 	submenu = Menu(menu, tearoff=False)
 	menu.add_cascade(label="Help", menu=submenu, font=("Meera", 12, "bold"))
 	submenu.add_command(label="Info", font=("Meera", 12, "bold"), compound=LEFT, image=infomenuicon, command=helpwindow, accelerator="Ctrl+H")
-	submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, accelerator="Ctrl+R")
-	submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_issues_page, image=githubicon, accelerator="Ctrl+G")
+	submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, command=github_issues_page, accelerator="Ctrl+R")
+	submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_page, image=githubicon, accelerator="Ctrl+G")
 
 	dispoptionswindow.config(menu=menu)
 
@@ -1889,7 +1889,7 @@ def withdraw_attn_window(*args):
 
 Attnwindow = tk.ThemedTk()
 Attnwindow.get_themes()
-Attnwindow.set_theme("clam")
+Attnwindow.set_theme("breeze")
 
 #icons
 phonesploitguiicon = PhotoImage(file="icons/phonesploitguilogo.png")
@@ -1932,8 +1932,8 @@ submenu.add_command(label="Close", font=("Meera", 12, "bold"), image=exitmenuico
 submenu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Help", menu=submenu, font=("Meera", 12, "bold"))
 submenu.add_command(label="Info", font=("Meera", 12, "bold"), compound=LEFT, command=helpwindow, image=infomenuicon, accelerator="Ctrl+H")
-submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, accelerator="Ctrl+R")
-submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_issues_page, image=githubicon, accelerator="Ctrl+G")
+submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, command=github_issues_page, accelerator="Ctrl+R")
+submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_page, image=githubicon, accelerator="Ctrl+G")
 
 #Binds
 Attnwindow.bind("<Control-c>", closeattnwindow)
