@@ -12,6 +12,9 @@ import Pmw
 from sys import platform
 import re
 
+def github_issues_page(*args):
+	webbrowser.open("https://github.com/sketchyboi14/PhoneSploitGui/issues")
+
 def specifyentrydelete(*args):
 	global specifyapkwindow_entry
 
@@ -1688,7 +1691,7 @@ def displayoptions(*args):
 	menu.add_cascade(label="Help", menu=submenu, font=("Meera", 12, "bold"))
 	submenu.add_command(label="Info", font=("Meera", 12, "bold"), compound=LEFT, image=infomenuicon, command=helpwindow, accelerator="Ctrl+H")
 	submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, accelerator="Ctrl+R")
-	submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_page, image=githubicon, accelerator="Ctrl+G")
+	submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_issues_page, image=githubicon, accelerator="Ctrl+G")
 
 	dispoptionswindow.config(menu=menu)
 
@@ -1886,7 +1889,7 @@ def withdraw_attn_window(*args):
 
 Attnwindow = tk.ThemedTk()
 Attnwindow.get_themes()
-Attnwindow.set_theme("breeze")
+Attnwindow.set_theme("clam")
 
 #icons
 phonesploitguiicon = PhotoImage(file="icons/phonesploitguilogo.png")
@@ -1930,7 +1933,7 @@ submenu = Menu(menu, tearoff=False)
 menu.add_cascade(label="Help", menu=submenu, font=("Meera", 12, "bold"))
 submenu.add_command(label="Info", font=("Meera", 12, "bold"), compound=LEFT, command=helpwindow, image=infomenuicon, accelerator="Ctrl+H")
 submenu.add_command(label="Report Issues", compound=LEFT, font=("Meera", 12, "bold"), image=issuesmenuicon, accelerator="Ctrl+R")
-submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_page, image=githubicon, accelerator="Ctrl+G")
+submenu.add_command(label="Visit my github page", compound=LEFT, font=("Meera", 12, "bold"), command=github_issues_page, image=githubicon, accelerator="Ctrl+G")
 
 #Binds
 Attnwindow.bind("<Control-c>", closeattnwindow)
