@@ -3,7 +3,7 @@
 ![Screenshot](Screenshots/Firstpage.png)
 ![Screenshot](Screenshots/Secondpage.png)
 
-**PhoneSploitGui is a gui version of the cli tool PhoneSploit. Which was created by metachar but it's no longer available.
+**PhoneSploitGui is a gui version of the cli tool PhoneSploit used to manage android devices that have USB Debugging enabled. Which was created by metachar but is no longer available.
 There are 20+ functions. This program uses ADB which must be installed to your device in order for this program to work. This program works for Windows, Linux and Mac OS.**
 
 # Installing PhoneSploitGui
