@@ -1,0 +1,4 @@
+ttkthemes==3.1.1
+tk==0.1.0
+Pmw==2.0.1
+system-query==0.2.7
