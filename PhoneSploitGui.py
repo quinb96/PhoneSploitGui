@@ -790,74 +790,54 @@ def screenshot():
 	global chosendev
 
 	os.system("adb -s" + chosendev + " shell screencap /sdcard/screen.png")
-	scrnshot_success_window = Toplevel()
-	scrnshot_success_window.title("PhoneSploitGui")
-
-	w = 500
-	h = 70
-
-	ws = scrnshot_success_window.winfo_screenwidth()
-	hs = scrnshot_success_window.winfo_screenheight()
-
-	x = (ws/2) - (w/2)
-	y = (hs/2) - (h/2)
-
-	scrnshot_success_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
-	scrnshot_success_icon = Label(scrnshot_success_window, image=screenshotbtnicon)
-	scrnshot_success_icon.place()
-	scrnshot_success_label = Label()
 	messagebox.showinfo("PhoneSploitGui", "Screenshot has been taken. Choose where you would like to save the screenshot.")
+	with open("output.txt", "w") as f:
+                save_loc = filedialog.asksaveasfilename(title="Save Screenshot", filetypes=(("PNG", "*.png"),("All Files", "*.*")))
+                proc = str(subprocess.call(["adb", "-s", chosendev, "pull", "/sdcard/screen.png", save_loc], stdout=f, stderr=f))
+                f.write(proc)
+                delete_file = str(subprocess.call(["adb", "shell", "rm", "-f", "/sdcard/screen.png"], stdout=f, stderr=f))
+                with open("output.txt", "r") as results:
+                        data = results.read()
+                        if re.search(r"pulled", data):
+                                scrnshot_save_window = Toplevel()
+                                scrnshot_save_window.title("PhoneSploitGui")
 
-	if platform == "win32":
-		filedialog.asksaveasfilename()
-	else:
-		if platform == "linux":
-			with open("output.txt", "w") as f:
-				save_loc = filedialog.asksaveasfilename(title="Save screenshot", filetypes=(("PNG", "*.png"),("All Files", "*.*")))
-				proc = str(subprocess.call(["adb", "-s", chosendev, "pull", "/sdcard/screen.png", save_loc], stdout=f, stderr=f))
-				f.write(proc)
-				with open("output.txt", "r") as results:
-					data = results.read()
-					if re.search(r"%", data):
-						scrnshot_save_window = Toplevel()
-						scrnshot_save_window.title("PhoneSploitGui")
+                                w = 500
+                                h = 70
 
-						w = 500
-						h = 70
+                                ws = scrnshot_save_window.winfo_screenwidth()
+                                hs = scrnshot_save_window.winfo_screenheight()
 
-						ws = scrnshot_save_window.winfo_screenwidth()
-						hs = scrnshot_save_window.winfo_screenheight()
+                                x = (ws/2) - (w/2)
+                                y = (hs/2) - (h/2)
 
-						x = (hs/2) - (w/2)
-						y = (ws/2) - (w/2)
+                                scrnshot_save_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
+                                scrnshot_save_window_icon = Label(scrnshot_save_window, image=screenshotbtnicon)
+                                scrnshot_save_window_icon.place(relx=0.19)
+                                scrnshot_save_window_label = Label(scrnshot_save_window, text="Screenshot has been saved", font=("Meera", 10, "bold"))
+                                scrnshot_save_window_label.place(relx=0.27, rely=0.08)
+                                scrnshot_save_window_btn = Button(scrnshot_save_window, text="OK", font=("Meera", 10, "bold"), command=scrnshot_save_window.destroy)
+                                scrnshot_save_window_btn.place(relx=0.45, rely=0.5)
+                        else:
+                                scrnshot_save_err_window = Toplevel()
+                                scrnshot_save_err_window.title("PhoneSploitGui")
 
-						scrnshot_save_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
-						scrnshot_save_window_icon = Label(scrnshot_save_window, image=screenshotbtnicon)
-						scrnshot_save_window_icon.place(relx=0.19)
-						scrnshot_save_window_label = Label(scrnshot_save_window, text="Screenshot has been saved", font=("Meera", 10, "bold"))
-						scrnshot_save_window_label.place(relx=0.27, rely=0.08)
-						scrnshot_save_window_btn = Button(scrnshot_save_window, text="OK", font=("Meera", 10, "bold"), command=scrnshot_save_window.destroy)
-						scrnshot_save_window_btn.place(relx=0.45, rely=0.5)
-					else:
-						scrnshot_save_err_window = Toplevel()
-						scrnshot_save_err_window.title("PhoneSploitGui")
+                                w = 800
+                                h = 90
 
-						w = 500
-						h = 70
+                                ws = scrnshot_save_err_window.winfo_screenwidth()
+                                hs = scrnshot_save_err_window.winfo_screenheight()
 
-						ws = scrnshot_save_err_window.winfo_screenwidth()
-						hs = scrnshot_save_err_window.winfo_screenheight()
+                                x = (ws/2) - (w/2)
+                                y = (hs/2) - (h/2)
 
-						x = (hs/2) - (w/2)
-						y = (ws/2) - (w/2)
-
-						scrnshot_save_err_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
-						scrnshot_save_err_window_icon = Label(scrnshot_save_err_window, image=screenshotbtnicon)
-						scrnshot_save_err_window_icon.place(relx=0.19)
-						scrnshot_save_err_window_label = Label(scrnshot_save_err_window, text="Unable to take screenshot. \nEither the user has an app that prevents screenshots or there's connectivity issues", font=("Meera", 10, "bold"))
-						scrnshot_save_err_window_label.place(relx=0.27, rely=0.08)
-						scrnshot_save_err_window_btn = Button(scrnshot_save_err_window, text="OK", font=("Meera", 10, "bold"), command=scrnshot_save_err_window.destroy)
-						scrnshot_save_err_window_btn.place(relx=0.45, rely=0.5)
+                                scrnshot_save_err_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
+                                scrnshot_save_err_window_icon = Label(scrnshot_save_err_window, image=screenshotbtnicon)
+                                scrnshot_save_err_window_icon.place(relx=0.19)
+                                scrnshot_save_err_window_label = Label(scrnshot_save_err_window, text="Unable to take screenshot. \nAn app that prevents screenshots might be running.", font=("Meera", 10, "bold"))
+                                scrnshot_save_err_window_label.place(relx=0.27, rely=0.08)
+                                scrnshot_save_err_window_btn = Button(scrnshot_save_err_window, text="OK", font=("Meera", 10, "bold"), command=scrnshot_save_err_window.destroy)
+                                scrnshot_save_err_window_btn.place(relx=0.45, rely=0.5)
 
 def helpwindow(*args):
 	helpwindow = Tk()
@@ -1061,7 +1041,7 @@ def page2(*args):
 	balloon.bind(showmacipbtn, "Reveal the ip or mac address of the device")
 	balloon.bind(ext_apkbtn, "Extract an apk with the current user data in it save to your computer")
 	balloon.bind(batstatbtn, "Get the status of the devices battery charge and overall condition")
-	#balloon.bind(netstatbtn,)
+	balloon.bind(netstatbtn, "View all the connections established on the device")
 	balloon.bind(togwifibtn, "Toggle the devices wifi interface on and off")
 	balloon.bind(unlockbtn, "Remove the lockscreen passcode from the device.")
 
@@ -1074,8 +1054,8 @@ def logmsg():
 	logmsg_window = Toplevel()
 	logmsg_window.title("PhoneSploitGui")
 
-	w = 500
-	h = 70
+	w = 900
+	h = 90
 
 	ws = logmsg_window.winfo_screenwidth()
 	hs = logmsg_window.winfo_screenheight()
@@ -1086,8 +1066,8 @@ def logmsg():
 	logmsg_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 	logmsg_window_icon = Label(logmsg_window, image=logbtnicon)
 	logmsg_window_icon.place(relx=0.21)
-	logmsg_window_label = Label(logmsg_window, text="Press OK to start the log. \nWhen you're finished, press Ctrl + C to stop the log generation", font=("Meera", 10, "bold"))
-	logmsg_window_label.place(relx=0.29, rely=0.08)
+	logmsg_window_label = Label(logmsg_window, text="Press OK to start the log. \nPress Ctrl + C to stop the log generation", font=("Meera", 10, "bold"))
+	logmsg_window_label.place(relx=0.29, rely=0.05)
 	logmsg_window_btn = Button(logmsg_window, text="OK", font=("Meera", 10, "bold"), command=startlog)
 	logmsg_window_btn.place(relx=0.45, rely=0.5)
 
@@ -1176,7 +1156,7 @@ def uninstallapp(*args):
 				uninstallapp_err_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 				uninstallapp_err_window_icon = Label(uninstallapp_err_window, image=uninstappbtnicon)
 				uninstallapp_err_window_icon.place(relx=0.21)
-				uninstallapp_err_window_label = Label(uninstallapp_err_window, text="The package specified wasn't found on the target device. \nIt's possible that it has been mispelled.", font=("Meera", 10, "bold"))
+				uninstallapp_err_window_label = Label(uninstallapp_err_window, text="The package specified wasn't found on the target device. \nPlease check spelling.", font=("Meera", 10, "bold"))
 				uninstallapp_err_window_label.place(relx=0.29, rely=0.08)
 				uninstallapp_err_window_btn = Button(uninstallapp_err_window, text="OK", command=uninstallapp_err_window.destroy)
 				uninstallapp_err_window_btn.place(relx=0.45, rely=0.5)
@@ -1312,9 +1292,13 @@ def clear_path_example(*args):
 def screenrec_save():
 	global chosendev
 	global screenrec_window
+	
+	screenrec_window.destroy()
 
-	save_location = filedialog.asksaveasfilename(title="Save video", defaultextension="mp4")
+	save_location = filedialog.asksaveasfilename(title="Save video", defaultextension=".mp4", filetypes=(("MP4 Files", ".mp4"),("All Files", "*.*")))
 	os.system("adb -s " + chosendev + " pull /sdcard/screenrec.mp4 " + save_location)
+	os.system("adb shell rm -f /sdcard/screenrec.mp4 " + save_location)
+	
 	
 	screenrec_save_window = Toplevel()
 	screenrec_save_window.title("PhoneSploitGui")
@@ -1333,13 +1317,13 @@ def screenrec_save():
 	screenrec_save_window_icon.place(relx=0.21)
 	screenrec_save_window_label = Label(screenrec_save_window, text="Video has been successfully saved", font=("Meera", 10, "bold"))
 	screenrec_save_window_label.place(relx=0.29, rely=0.08)
-	screenrec_save_window_btn = Button(screenrec_save_window, text="OK", font=("Meera", 10, "bold"))
+	screenrec_save_window_btn = Button(screenrec_save_window, text="OK", command=screenrec_save_window.destroy, font=("Meera", 10, "bold"))
 	screenrec_save_window_btn.place(relx=0.45, rely=0.5)
 
 def screenrec_proc():
 	global chosendev
 	global screenrec_window
-
+	
 	screenrec_window.destroy()
 	with open("output.txt", "w") as f:
 		proc = str(subprocess.call(["adb", "-s", chosendev, "shell", "screenrecord", "/sdcard/screenrec.mp4"], stdout=f, stderr=f))
@@ -1362,7 +1346,7 @@ def screenrec_proc():
 				screenrec_devoffline_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 				screenrec_devoffline_window_icon = Label(screenrec_devoffline_window, image=screenrecbtnicon)
 				screenrec_devoffline_window_icon.place(relx=0.17)
-				screenrec_devoffline_window_label = Label(screenrec_devoffline_window, text="Device is offline. Disconnect and reconnect to it to see \nif that solves the problem", font=("Meera", 10, "bold"))
+				screenrec_devoffline_window_label = Label(screenrec_devoffline_window, text="Device is offline. Click Connect a phone to \nreconnect to the device.", font=("Meera", 10, "bold"))
 				screenrec_devoffline_window_label.place(relx=0.23, rely=0.08)
 				screenrec_devoffline_window_btn = Button(screenrec_devoffline_window, text="OK", font=("Meera", 10, "bold"), command=screenrec_devoffline_window.destroy)
 				screenrec_devoffline_window_btn.place(relx=0.45, rely=0.55)
@@ -1401,9 +1385,9 @@ def screenrec_proc():
 
 				screenrec_NF_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 				screenrec_NF_window_icon = Label(screenrec_NF_window, image=screenrecbtnicon)
-				screenrec_NF_window_icon.place(relx=0.21)
-				screenrec_NF_window_label = Label(screenrec_NF_window, text="Device not found. The session may have either timed \nout, the user left the network, or \nthe user changed network interfaces", font=("Meera", 10, "bold"))
-				screenrec_NF_window_label.place(relx=0.29, rely=0.08)
+				screenrec_NF_window_icon.place(relx=0.15)
+				screenrec_NF_window_label = Label(screenrec_NF_window, text="Device not found. It may have disconnected", font=("Meera", 10, "bold"))
+				screenrec_NF_window_label.place(relx=0.22, rely=0.01)
 				screenrec_NF_window_btn = Button(screenrec_NF_window, text="OK", font=("Meera", 10, "bold"), command=screenrec_NF_window.destroy)
 				screenrec_NF_window_btn.place(relx=0.45, rely=0.5)
 			else:
@@ -1421,10 +1405,10 @@ def screenrec_proc():
 
 				screenrec_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 				screenrec_window_icon = Label(screenrec_window, image=screenrecbtnicon)
-				screenrec_window_icon.place(relx=0.21)
-				screenrec_window_label = Label(screenrec_window, text="Recording is done. Choose where you want to save the video", font=("Meera", 10, "bold"))
-				screenrec_window_label.place(relx=0.29, rely=0.08)
-				screenrec_window_btn = Button(screenrec_window, text="OK", font=("Meera", 10, "bold"), command=screenrec_window.destroy)
+				screenrec_window_icon.place(relx=0.13)
+				screenrec_window_label = Label(screenrec_window, text="Recording is done. Choose where you want to \nsave the video", font=("Meera", 10, "bold"))
+				screenrec_window_label.place(relx=0.21, rely=0.00)
+				screenrec_window_btn = Button(screenrec_window, text="OK", font=("Meera", 10, "bold"), command=screenrec_save)
 				screenrec_window_btn.place(relx=0.45, rely=0.5)
 
 def screenrecord():
@@ -1536,6 +1520,8 @@ def openshell():
 	os.system("adb -s " + chosendev + " shell")
 
 def disconnect_devices():
+	global listbox
+	
 	with open("output.txt", "w") as f:
 		proc = str(subprocess.call(["adb", "disconnect"], stdout=f, stderr=f))
 		f.write(proc)
@@ -1599,7 +1585,7 @@ def connect_no_new_window(*args):
 	enterip_window_label.pack()
 	enterip_window_entry = Entry(enterip_window, width=50, bg="white", font=("Meera", 10, "bold"))
 	enterip_window_entry.pack()
-	enterip_window_entry.insert(0, "example: 192.168.1.1")
+	enterip_window_entry.insert(0, "example: 192.168.1.1:5555")
 	enterip_window_entry.bind("<Return>", new_device_connected)
 	enterip_window_entry.bind("<ButtonRelease-1>", clear_connect_no_new_window_example)
 
@@ -1754,8 +1740,11 @@ def displayoptions(*args):
 	balloon.bind(downarrowbtn, "View the next page of options")
 
 def readfile():
+	global listbox
+	
 	with open("output.txt", "r") as f:
-		listbox.insert(0, f.read())
+		results = f.read()
+		print(results)
 
 def connect_device(*args):
 	global devip
@@ -1882,7 +1871,7 @@ def withdraw_attn_window(*args):
 	ipmsg = ttk.Label(chooseip, text="Enter an internal or external ip address of a phone.", font=("Meera", 10, "bold"))
 	ipmsg.pack()
 	devip = Entry(chooseip, width=50, bg="white", font=("Meera", 10, "bold"))
-	devip.insert(0, "example: 192.168.1.1")
+	devip.insert(0, "example: 192.168.1.1:5555")
 	devip.pack()
 	devip.bind("<Return>", connect_device)
 	devip.bind("<ButtonRelease-1>", clear_ip_example)
@@ -1891,7 +1880,7 @@ Attnwindow = tk.ThemedTk()
 Attnwindow.get_themes()
 Attnwindow.set_theme("breeze")
 
-#icons
+#Icons
 phonesploitguiicon = PhotoImage(file="icons/phonesploitguilogo.png")
 disconnectbtnicon = PhotoImage(file="icons/disconnect.png")
 connectbtnicon = PhotoImage(file="icons/connect.png")
