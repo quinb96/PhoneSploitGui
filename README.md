@@ -8,6 +8,13 @@ There are 20+ functions to PhoneSploitGui. PhoneSploitGui uses ADB, Python and J
 
 _PhoneSploitGui WILL appear to be frozen. However it's not. I made this using tkinter which doesn't utilize threads which would have it be able to do more than 1 task. Because of this, you have to wait for the task to finish first before using the program again. Graphics will appear weird when a task is in process. I'll use a better gui toolkit next time._
 
+# New Update v1.1
+* **Screenshot & Screen Record now delete the picture/video after taking it**<br>
+* **Rephrasing pop-up messages**<br>
+* **Fixed bug where the Screen Recording pop-up stays open after cliking "OK"**<br>
+* **Fixed bug where error message appears at bottom left corner of the screen**<br>
+
+
 # Installing PhoneSploitGui
 # Windows
 
