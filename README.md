@@ -11,7 +11,7 @@ _PhoneSploitGui WILL appear to be frozen. However it's not. I made this using tk
 # New Update v1.1
 * **Screenshot & Screen Record now delete the picture/video from the targets device after taking it**<br>
 * **Rephrasing pop-up messages**<br>
-* **Fixed bug where the Screen Recording pop-up stays open after cliking "OK"**<br>
+* **Fixed bug where the Screen Recording pop-up stays open after clicking "OK"**<br>
 * **Fixed bug where error message appears at bottom left corner of the screen**<br>
 * **Released Windows setup file to simplify installation process**<br>
 
