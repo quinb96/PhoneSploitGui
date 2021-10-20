@@ -13,6 +13,7 @@ _PhoneSploitGui WILL appear to be frozen. However it's not. I made this using tk
 * **Rephrasing pop-up messages**<br>
 * **Fixed bug where the Screen Recording pop-up stays open after cliking "OK"**<br>
 * **Fixed bug where error message appears at bottom left corner of the screen**<br>
+* **Released Windows setup file to simplify installation process.<br>
 
 
 # Installing PhoneSploitGui
