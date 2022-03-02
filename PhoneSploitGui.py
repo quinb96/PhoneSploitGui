@@ -532,7 +532,7 @@ def runapp(*args):
 					runapp_success_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 					runapp_success_window_icon = Label(runapp_success_window, image=runappbtnicon)
 					runapp_success_window_icon.place(relx=0.19)
-					runapp_success_window_label = Label(runapp_success_window, text="There was an error trying to start the specified application. \nEither the package name has been mispelled, the client has left the network, or the host has disconnected from the client. \nIf that's the case, you'll need to reconnect to the device", font=("Meera", 10, "bold"))
+					runapp_success_window_label = Label(runapp_success_window, text="There was an error trying to start the specified application. \nEither the package name has been mispelled, the client has left the network, or the host has disconnected from the client.", font=("Meera", 10, "bold"))
 					runapp_success_window_label.place(relx=0.27, rely=0.08)
 					runapp_success_window_btn = Button(runapp_success_window, text="OK", font=("Meera", 10, "bold"), command=runapp_success_window.destroy)
 					runapp_success_window_btn.place(relx=0.45, rely=0.5)
