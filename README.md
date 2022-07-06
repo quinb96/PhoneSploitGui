@@ -25,6 +25,6 @@ _PhoneSploitGui WILL appear to be frozen. However it's not. I made this using tk
 
 # Linux
 
-* **Install adb and python3 using ``sudo apt-get install adb python3.6``.**
+* **Install adb and python3 using ``sudo apt-get install adb python3``.**
 * **Next, type ``pip3 install -r requirements.txt`` which will install all the necessary libraries.**
 * **Finally, type ``sudo python3 PhoneSploitGui.py``.**
